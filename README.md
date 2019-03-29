@@ -17,4 +17,4 @@ The program depends on samtools to retrieve sequence from reference genome fasta
 Please note that the program assume all the variants in VCF file using the reference sequncing to call variants, and it won't fix strand issue, that is, if the VCF file used based from reverse-complement strand, it won't be fixed and will be removed from the VCF file.
 
 ### See also:
-[gvcftools](https://sites.google.com/site/gvcftools/)
+    [gvcftools](https://sites.google.com/site/gvcftools/)
