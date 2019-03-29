@@ -1,4 +1,4 @@
-### FixRef.py
+### FixRef.py: Fix reference allele in vcf file
 
 ```bash
 python2        FixRef.py        input.vcf        fixRef.vcf        reference.fasta
@@ -31,3 +31,4 @@ Please note that the program assume all the variants in VCF file using the refer
 
 #### linkout:
    - [gvcftools](https://sites.google.com/site/gvcftools/)
+   - [bcftools +fixref](https://samtools.github.io/bcftools/howtos/plugin.fixref.html)
