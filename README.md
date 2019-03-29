@@ -18,9 +18,9 @@ The output file for the variant above is as following,
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT    S1    S2    S3
 chr1    69511   .       A       C,G     .       PASS    .       GT        1/1   0/1   0/2
 ```
-For variants do not find matched allele with reference genome, the information about that variant will be output to screen.
+For variants do not have matched allele with reference genome, the information for unmatched variants will be output to screen.
 
-The program can be used to correct allele issue when merge multiple gvcf file with gvcftools.
+The program can be used to correct allele issue when merging multiple gvcf file with **gvcftools**.
 
 #### Requirement:
 The program depends on samtools to retrieve sequence from reference genome fasta file. Please have samtools installed and path set up before running the program.
