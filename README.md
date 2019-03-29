@@ -10,7 +10,7 @@ The program can be used to correct issue with VCF that the REF allele does not m
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT   S1    S2    S3
 chr1    69511   .       C       A,G     .       PASS    .       GT       0/0   1/1   1/2
 ```
-The reference genome hg19 has "A" base at the location chr1:69511. In the vcf file above, A is one of the alternative allele. The FixRef.py program will set A as REF allele, and C,G as ALT alleles, and change the genotype call for samples S1, S2 and S3 to 1/1, 0/0, 0/2.
+The reference genome hg19 has "A" base at the location chr1:69511. However, in the vcf file above, 'A' is one of the alternative allele. The [b]FixRef.py[/b] program will set A as REF allele, and C,G as ALT alleles, and change the genotype call for samples S1, S2 and S3 to 1/1, 0/0, 0/2.
 
 The output file for the variant above is as following,
 
