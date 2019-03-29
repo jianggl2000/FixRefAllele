@@ -1,6 +1,6 @@
 ### FixRef.py
 
-python2        FixRef.py        input.vcf        fixRef.vcf        reference.fasta
+`python2        FixRef.py        input.vcf        fixRef.vcf        reference.fasta`
 
 #### Usage:
 The program can be used to correct issue with vcf that the Ref allele not match reference genome sequence. For example,
