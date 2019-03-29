@@ -5,7 +5,7 @@ python2        FixRef.py        input.vcf        fixRef.vcf        reference.fas
 ```
 
 #### Usage:
-The program can be used to correct issue with vcf that the Ref allele not match reference genome sequence. For example,
+The program can be used to correct issue with vcf that the REF allele not match reference genome sequence. For example,
 ```
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT   S1    S2    S3
 chr1    69511   .       C       A,G     .       PASS    .       GT       0/0   1/1   1/2
