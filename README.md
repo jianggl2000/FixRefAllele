@@ -12,5 +12,5 @@ In the vcf file above, the reference genome hg19 has
 ### Requirement:
 The program depends on samtools to retrieve sequence from reference genome fasta file. Please have samtools installed and path set up before running the program.
 
-### Important
+### Important:
 Please note that the program won't fix strand issue, that is, if the VCF file used based from reverse-complement strand, it won't be fixed and will be removed from the VCF file.
