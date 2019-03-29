@@ -1,4 +1,4 @@
-# FixRef.py
+## FixRef.py
 
 ### Usage:
 python2        FixRef.py        input.vcf        fixRef.vcf        reference.fasta
