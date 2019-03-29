@@ -14,4 +14,4 @@ The reference genome hg19 has "A" base at the location chr1:69511. In the vcf fi
 The program depends on samtools to retrieve sequence from reference genome fasta file. Please have samtools installed and path set up before running the program.
 
 #### Important:
-Please note that the program won't fix strand issue, that is, if the VCF file used based from reverse-complement strand, it won't be fixed and will be removed from the VCF file.
+Please note that the program assume all the variants in VCF file using the reference sequncing to call variants, and it won't fix strand issue, that is, if the VCF file used based from reverse-complement strand, it won't be fixed and will be removed from the VCF file.
