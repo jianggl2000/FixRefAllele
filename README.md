@@ -1,6 +1,6 @@
 # FixRef.py
 
-# Usage:
+## Usage:
 python2 FixRef.py input.vcf fixRef.vcf reference.fasta
 
 The program can be used to correct issue with vcf that the Ref allele not match reference genome sequence. For example,
@@ -9,5 +9,5 @@ chr1    69511   .       C       A,G     .       PASS    .       GT:DP
 
 In the vcf file above, the reference genome hg19 has 
 
-# Requirment:
+## Requirment:
 The program depends on samtools to retrieve sequence from reference genome fasta file. Please have samtools installed and path set up before running the program.
