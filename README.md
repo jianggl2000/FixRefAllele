@@ -20,7 +20,7 @@ chr1    69511   .       A       C,G     .       PASS    .       GT        1/1   
 ```
 For variants do not have matched allele with reference genome, the information for unmatched variants will be output to screen.
 
-The program can be used to correct allele issue when merging multiple gvcf file with **gvcftools**.
+The program can be used to correct allele issue when merging multiple gvcf file with **_gvcftools_**.
 
 #### Requirement:
 The program depends on samtools to retrieve sequence from reference genome fasta file. Please have samtools installed and path set up before running the program.
