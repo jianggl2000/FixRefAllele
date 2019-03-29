@@ -17,6 +17,7 @@ The output file for the variant above is as following,
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT    S1    S2    S3
 chr1    69511   .       A       C,G     .       PASS    .       GT        1/1   0/0   0/2
 ```
+For variants do not find matched allele with reference genome, the information about that variant will be output to screen.
 
 The program can be used to correct allele issue when merge multiple gvcf file with gvcftools.
 
