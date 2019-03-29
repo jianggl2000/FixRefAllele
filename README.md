@@ -1,16 +1,17 @@
-## FixRef.py
+### FixRef.py
 
-### Usage:
+
+#### Usage:
 python2        FixRef.py        input.vcf        fixRef.vcf        reference.fasta
 
 The program can be used to correct issue with vcf that the Ref allele not match reference genome sequence. For example,
-#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT
-chr1    69511   .       C       A,G     .       PASS    .       GT:DP
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT   S1    S2    S3
+chr1    69511   .       C       A,G     .       PASS    .       GT       0/0   1/1   1/2
 
-In the vcf file above, the reference genome hg19 has 
+The reference genome hg19 has "A" base at the location chr1:69511. In the vcf file above, A is one of the alternative allele. The program will set A as REF allele, and C,G as ALT alleles, and change the genotype call for samples S1, S2 and S3 to 1/1, 0/0, 0/2.
 
-### Requirement:
+#### Requirement:
 The program depends on samtools to retrieve sequence from reference genome fasta file. Please have samtools installed and path set up before running the program.
 
-### Important:
+#### Important:
 Please note that the program won't fix strand issue, that is, if the VCF file used based from reverse-complement strand, it won't be fixed and will be removed from the VCF file.
