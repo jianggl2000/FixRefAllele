@@ -29,7 +29,7 @@ chr1    69511   .       A       C,G     .       PASS    .       GT        1/1   
 ```
 For variants do not have matched allele with reference genome, the information for unmatched variants will be output to screen.
 
-The program was developped to correct allele issue when merging multiple gvcf file generated with **_gvcftools_**.
+The program was developped to correct allele issue when merging multiple gvcf file generated with **_gvcftools_**, where gvcftools was used to merge multiple gvcf files generated from ion torrent whole-exome sequencing data.
 
 #### Requirement:
 python 2.7 and modules argparse, pyfaidx, os and re
