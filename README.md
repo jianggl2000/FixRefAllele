@@ -15,6 +15,10 @@ optional arguments:
 ```
 
 #### Usage:
+```bash
+git clone https://github.com/jianggl2000/FixRefAllele
+python2 FixRefAllele/FixRef.py -v your_vcf.vcf -f your_ref.fasta -o fixRef.vcf
+```
 The program can be used to correct issue with VCF that the REF allele does not match the reference genome sequence. For example,
 ```
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT   S1    S2    S3
