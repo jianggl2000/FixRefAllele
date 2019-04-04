@@ -35,7 +35,7 @@ The program was developped to correct allele issue when merging multiple gvcf fi
 python 2.7 and modules argparse, pyfaidx, os and re
 
 #### Important:
-Please note that the program assumes all the variants using the same reference sequncing to call variants, and it won't fix strand issue, that is, if the VCF file used reverse-complement strand to call variant, the problem won't be fixed and the variant will be removed from the output VCF file if none of the REF or ALT alleles match the reference sequence.
+Please note that the program assumes all the variants were called using the same reference sequncing, and it won't fix strand issues, that is, if the VCF file used reverse-complement strand to call variant, the problem won't be fixed and the variant will be removed from the output VCF file if none of the REF or ALT alleles match the reference sequence.
 
 Please also note that the program only flip REF and ALT alleles, and modify genotype GT for all individuals accordingly. Other information will keep as it is in the input file. 
 
