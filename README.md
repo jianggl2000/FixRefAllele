@@ -17,7 +17,7 @@ optional arguments:
 #### Usage:
 ```bash
 git clone https://github.com/jianggl2000/FixRefAllele
-python2 FixRefAllele/FixRef.py -v your_vcf.vcf -f your_ref.fasta -o fixRef.vcf
+python2 FixRefAllele/FixRef.py -v your_input_vcf.vcf -f your_reference.fasta -o fixRef.vcf
 ```
 The program can be used to correct issue with VCF that the REF allele does not match the reference genome sequence. For example,
 ```
