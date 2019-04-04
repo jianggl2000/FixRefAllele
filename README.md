@@ -1,6 +1,6 @@
 ### FixRef.py: Fix reference allele in vcf file
 
-```bash
+```
 usage: FixRef.py [-h] -f REF -v VCF -o OUTPUT
 
 The program fixes the issue in VCF file that reference allele is in ALT column instead of REF.
