@@ -10,7 +10,7 @@ def get_args():
     parser = argparse.ArgumentParser(description='The program fixes the issue with VCF file that reference allele is in ALT column instead of REF.')
     parser.add_argument("-f", "--reference", help="reference sequence in fasta format ", required=True, dest="ref")
     parser.add_argument("-v", "--vcf", help="input vcf file", required=True)
-    parser.add_argument("-o", "--output", help="output vcf file", required=True) # type=argparse.FileType('w')
+    parser.add_argument("-o", "--output", help="output vcf file", required=True)
     return parser.parse_args()
 
 def processVCF(infile, outfile, refile):
