@@ -1,52 +1,54 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+import argparse
+from pyfaidx import Fasta
 import os
-import sys
 import re
-import subprocess
+
+def get_args():
+    parser = argparse.ArgumentParser(description='The program fixes the issue in VCF file that reference allele is in ALT column instead of REF.')
+    parser.add_argument("-f", "--reference", help="reference sequence in fasta format ", required=True, dest="ref")
+    parser.add_argument("-v", "--vcf", help="input vcf file", required=True)
+    parser.add_argument("-o", "--output", help="output vcf file", required=True) # type=argparse.FileType('w')
+    return parser.parse_args()
 
 def processVCF(infile, outfile, refile):
+    genome = Fasta(refile)
     nRef = nFlip = nErr = 0
     input = open(infile)
     output = open(outfile, "w")
+    nread = 0
     for line in input.readlines():
         lines = line.split("\t")
         if line.startswith("#"):
             output.write(line)
         else:
             Chr = lines[0]
-            Ref = lines[3]
-            Alts = lines[4].split(",")            
-            Start = lines[1]
-            End1 = str(int(Start) + len(Ref) - 1)
-            CMD = "samtools faidx " + refile +" "+ Chr+":"+Start+"-"+End1
-            rd = os.popen(CMD)
-            rText = rd.read()
-            refSeq = rText.split("\n")[1]
-            rd.close()
+            REF = lines[3]
+            ALTs = lines[4].split(",")            
+            Start = int(lines[1])-1
+            End1 = int(Start) + len(REF)
+            refSeq = genome[Chr][Start:End1].seq 
 
             NoRef = True #none of the allele can be found in reference sequence
-            if Ref == refSeq:
+            if REF == refSeq:
                 nRef = nRef+1
                 output.write(line)
                 NoRef = False
                 continue
             else:
-                for i,allele in enumerate(Alts):
-                    End2 = str(int(Start) + len(allele)-1)
-                    CMD = "samtools faidx " + refile +" "+ Chr+":"+Start+"-"+End2
-                    rd = os.popen(CMD)
-                    rText = rd.read()
-                    refSeq = rText.split("\n")[1]
-                    rd.close()
+                for i,allele in enumerate(ALTs):
+                    End2 = int(Start) + len(allele)
+                    if End1 != End2:
+                        refSeq = genome[Chr][Start:End1].seq 
                     if allele == refSeq:
                         NoRef = False
                         nFlip = nFlip+1
                         lines[3] = refSeq
-                        newAlts = Alts
-                        newAlts.remove(allele)
-                        newAlts.insert(i, Ref)
-                        lines[4] = ",".join(newAlts)
+                        ALTs.remove(allele)
+                        ALTs.insert(i, REF)
+                        lines[4] = ",".join(ALTs)
                         for j in range(9, len(lines)): #genotype for sample j
                             if lines[j].rstrip() == ".":
                                 continue
@@ -61,9 +63,7 @@ def processVCF(infile, outfile, refile):
                                     elif tmpGTs[t] == str(i+1):
                                         GTs[t] = '0'
                                 if int(GTs[0]) > int(GTs[1]):
-                                    tmp = GTs[0]
-                                    GTs[0] = GTs[1]
-                                    GTs[1] = tmp
+                                    GTs = GTs[::-1]
                                 GT = "/".join(GTs)
                                 Geno[0] = GT
                                 lines[j] = ":".join(Geno)
@@ -76,9 +76,7 @@ def processVCF(infile, outfile, refile):
                                     elif tmpGTs[t] == str(i+1):
                                         GTs[t] = '0'
                                 if int(GTs[0]) < int(GTs[1]):
-                                    tmp = GTs[0]
-                                    GTs[0] = GTs[1]
-                                    GTs[1] = tmp
+                                    GTs = GTs[::-1]
                                 GT = "|".join(GTs)
                                 Geno[0] = GT
                                 lines[j] = ":".join(Geno)
@@ -89,17 +87,22 @@ def processVCF(infile, outfile, refile):
                         continue #stop once found match allele
             if NoRef:
                 nErr = nErr+1
-                print "Reference allele not found for %s:%s-%s %s %s" % (lines[0], Start, End1, lines[3], lines[4])
+                print "Reference allele %s not found for %s:%s [%s] [%s]" % (refSeq, lines[0], End1, lines[3], lines[4])
+        nread = nread+1
+        if nread%1000 == 0:
+            print "********** finished %s variants, %s:%s **********" % (nread, Chr, Start)
 
-    print "*****************************************\n"
-    print "* Number of variants have matched allele: %s\n" % (nRef)
-    print "* Number of variants have flipped allele: %s\n" % (nFlip)
-    print "* Number of variants have no-match allele: %s\n" % (nErr)
+    print "\n*****************************************"
+    print "* Number of variants have matched allele: %s" % (nRef)
+    print "* Number of variants have flipped allele: %s" % (nFlip)
+    print "* Number of variants have no-match allele: %s droped" % (nErr)
     print "*****************************************\n"
     input.close()
     output.close()
 
 if __name__=="__main__":
-    print "Please note that this software can only be used to flip Ref and Alt alleles to make the Ref allele same as reference genome.\nMake sure you have the same version of reference for variant calling."
-    print "Read from %s, and save to %s" % (sys.argv[1], sys.argv[2])
-    processVCF(sys.argv[1], sys.argv[2], sys.argv[3])
+    args = get_args()
+    print "Please note that this software can only be used to flip REF and ALT alleles and corresponding GT calling, to make the REF allele same as reference genome.\nMake sure you have the same version of reference for variant calling."
+    print "Read from %s, and save to %s" % (args.vcf, args.output)
+    processVCF(args.vcf, args.output, args.ref)
+    
