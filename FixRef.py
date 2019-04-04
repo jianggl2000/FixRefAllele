@@ -95,7 +95,7 @@ def processVCF(infile, outfile, refile):
     print "\n*****************************************"
     print "* Number of variants have matched allele: %s" % (nRef)
     print "* Number of variants have flipped allele: %s" % (nFlip)
-    print "* Number of variants have no-match allele: %s droped" % (nErr)
+    print "* Number of variants have no-match allele: %s (dropped)" % (nErr)
     print "*****************************************\n"
     input.close()
     output.close()
