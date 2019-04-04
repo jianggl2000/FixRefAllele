@@ -1,7 +1,17 @@
 ### FixRef.py: Fix reference allele in vcf file
 
 ```bash
-python2   FixRef.py   input.vcf   fixRef.vcf   reference.fasta
+usage: FixRef.py [-h] -f REF -v VCF -o OUTPUT
+
+The program fixes the issue in VCF file that reference allele is in ALT column instead of REF.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f REF, --reference REF
+                        reference sequence in fasta format
+  -v VCF, --vcf VCF     input vcf file
+  -o OUTPUT, --output OUTPUT
+                        output vcf file
 ```
 
 #### Usage:
